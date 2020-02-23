@@ -42,7 +42,7 @@ exports.auth=async (req,res)=>{
     User.findOne({username:req.body.username})
     .then(async (user)=>{
         if(!user){
-            res.status(401).json({message:"Invalid username or password"})
+            res.status(401).json({message:"Invalid grant authorization"})
         }else{
             let grant = await bcrypt.compareSync(req.body.password,user.password);
             if(grant){
@@ -55,7 +55,8 @@ exports.auth=async (req,res)=>{
                 })
             }
         }
-
+    })
+    .catch(err=>{
         res.status(401).json({message:"Invalid grant authorization"})
     })
 }
@@ -81,7 +82,7 @@ exports.validate=(method)=>{
     switch (method){
         case"register":{
             return [
-                check('username').exists().withMessage('Username is not exists'),
+                check('username').exists().notEmpty().bail().withMessage('Username is required'),
                 check('username').custom(value=>{
                     
                     return User.findOne({username:value})
@@ -90,15 +91,15 @@ exports.validate=(method)=>{
                             return Promise.reject("Username already in use");
                         }
                     })
-                }),
-                check('password').exists().withMessage('Password is not exists'),
+                }).bail(),
+                check('password').exists().notEmpty().bail().withMessage('Password is required'),
                 check("password").custom((value,{req})=>{
                     if(value !== req.body.confirm){
                         return Promise.reject("Invalid password confirmation");
                     }else{
                         return true;
                     }
-                })
+                }).bail()
             ]
         }
     }

@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.post('/register',UserController.validate('register'),UserController.register);
+router.post('/register',UserController.validate("register"),UserController.register);
 
 router.post('/auth/token',UserController.auth);
 router.post('/auth/refresh',UserController.refreshToken);

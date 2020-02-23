@@ -5,10 +5,12 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require("mongoose");
 const env=require('dotenv').config()
-
+const cors = require('cors');
 const indexRouter = require('./routes/index');
 const apiRouter = require("./routes/api.js");
 const app = express();
+
+app.use(cors());
 
 // Connection
 mongoose.connect(env.parsed.MONGO_URI,{useNewUrlParser:true})
