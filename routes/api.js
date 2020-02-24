@@ -18,5 +18,10 @@ router.get("/ping",[
 });
 
 router.post("/message",MessageController.validate("post_message"),MessageController.postMessage);
+
+router.post("/like",MessageController.validate("post_like"),MessageController.postLike);
+
+router.post("/dislike",MessageController.validate("post_like"),MessageController.postDislike);
+
 router.get("/message",MessageController.getMessage);
 module.exports=router;

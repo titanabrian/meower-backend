@@ -3,6 +3,7 @@ const User = require("../models/User");
 const {check,validationResult} = require("express-validator/check");
 const jwt=require("jsonwebtoken");
 const env = require("dotenv").config();
+const Schema = require("mongoose").Schema;
 
 exports.register=(req,res)=>{
     try{
