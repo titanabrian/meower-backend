@@ -46,8 +46,8 @@ exports.auth=async (req,res)=>{
         }else{
             let grant = await bcrypt.compareSync(req.body.password,user.password);
             if(grant){
-                let access_token = jwt.sign({_id:user._id,username:user.username},env.parsed.TOKEN_SECRET,{expiresIn:3600})
-                let refresh_token = jwt.sign({_id:user._id,username:user.username},env.parsed.REFRESH_SECRET,{expiresIn:60*60*12})
+                let access_token = jwt.sign({_id:user._id,username:user.username},env.parsed.TOKEN_SECRET,{expiresIn:60*60})
+                let refresh_token = jwt.sign({_id:user._id,username:user.username},env.parsed.REFRESH_SECRET,{expiresIn:"3h"})
                 res.json({
                     message:"Successfully Logen In",
                     access_token:access_token,
