@@ -11,17 +11,26 @@ const apiRouter = require("./routes/api.js");
 const app = express();
 
 app.use(cors());
-
 // Connection
-mongoose.connect(env.parsed.MONGO_URI,{useNewUrlParser:true})
-.then(()=>console.log("Connected To Database"))
-.catch(()=>console.log("Failed to Connect to Database"));
+if(process.env.NODE_ENV=="development"){
+  app.use(logger('dev'));
+  mongoose.connect(env.parsed.MONGO_DEV_URI,{useNewUrlParser:true,useUnifiedTopology: true})
+  .then(()=>console.log("Connected To Database"))
+  .catch(()=>console.log("Failed to Connect to Database"));
+}else if(process.env.NODE_ENV=="testing"){
+  mongoose.connect(env.parsed.MONGO_TEST_URI,{useNewUrlParser:true,useUnifiedTopology: true})
+  .then(()=>console.log("Connected To Database"))
+  .catch(()=>console.log("Failed to Connect to Database"));
+}else if(process.env.NODE_ENV=="production"){
+  mongoose.connect(env.parsed.MONGO_PRODURI,{useNewUrlParser:true,useUnifiedTopology: true})
+  .then(()=>console.log("Connected To Database"))
+  .catch(()=>console.log("Failed to Connect to Database"));
+}
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -51,5 +60,6 @@ app.use(function(err, req, res, next) {
 const port =env.parsed.PORT||3000;
 
 app.listen(port);
+console.log("\x1b[32m", process.env.NODE_ENV+" Server Running on Port : "+port)
 
 module.exports = app;

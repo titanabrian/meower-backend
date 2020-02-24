@@ -1,6 +1,6 @@
 const bcrypt =require("bcryptjs");
 const User = require("../models/User");
-const {check,validationResult} = require("express-validator/check");
+const {check,validationResult} = require("express-validator");
 const jwt=require("jsonwebtoken");
 const env = require("dotenv").config();
 const Schema = require("mongoose").Schema;
@@ -54,6 +54,8 @@ exports.auth=async (req,res)=>{
                     access_token:access_token,
                     refresh_token:refresh_token
                 })
+            }else{
+                res.status(401).json({message:"Invalid grant authorization"})
             }
         }
     })
