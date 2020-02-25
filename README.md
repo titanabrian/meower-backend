@@ -48,7 +48,6 @@ Install dependencies
 ```
 $ npm install
 ```
-End with an example of getting some data out of the system or using it for a little demo
 
 ## Running The Backend
 ** Note : You can't run all the **environments** at the same time on the same machine 
@@ -78,6 +77,9 @@ Run the following command
 ```
 $ npm run prod
 ```
+
+## Running The Frontend
+See how to run frontend application here [documentation](https://github.com/titanabrian/meower-frontend.git)
 
 ## Authors
 
