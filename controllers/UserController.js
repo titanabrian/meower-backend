@@ -85,9 +85,8 @@ exports.validate=(method)=>{
     switch (method){
         case"register":{
             return [
-                check('username').exists().notEmpty().bail().withMessage('Username is required'),
+                check('username').exists().trim().notEmpty().bail().withMessage('Username is required'),
                 check('username').custom(value=>{
-                    
                     return User.findOne({username:value})
                     .then((user)=>{
                         if(user){
@@ -95,7 +94,7 @@ exports.validate=(method)=>{
                         }
                     })
                 }).bail(),
-                check('password').exists().notEmpty().bail().withMessage('Password is required'),
+                check('password').exists().trim().notEmpty().bail().withMessage('Password is required'),
                 check("password").custom((value,{req})=>{
                     if(value !== req.body.confirm){
                         return Promise.reject("Invalid password confirmation");
