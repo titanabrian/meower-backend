@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "env NODE_ENV=development nodemon ./app.js",
-    "dev:reset":"node ./reset.js && env NODE_ENV=development nodemon ./app.js ",
+    "dev:reset":"node ./reset.js --silent && env NODE_ENV=development nodemon ./app.js ",
     "prod":"node ./app.js",
     "test:run-server": "env NODE_ENV=testing node ./app.js",
     "test:run-test":"mocha ./test/test.js --reporter spec" 
