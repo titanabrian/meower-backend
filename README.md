@@ -58,6 +58,11 @@ Run folowing command and open to your browser at http://localhost:${YOUR_APPLICA
 $ npm run dev
 ```
 
+If you want to run development environment and reset the database, you can do following command
+```
+$ npm run dev:reset
+```
+
 ### Testing Environment
 You have to run server for testing environment.
 ```
