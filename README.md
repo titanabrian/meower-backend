@@ -6,7 +6,7 @@
 
 You can run this application on your server by clone to [https://github.com/titanabrian/meower-backend.git](https://github.com/titanabrian/meower-backend.git) for the backend service and [https://github.com/titanabrian/meower-frontend.git](https://github.com/titanabrian/meower-frontend.git) for the frontend
 
-#### Prerequisites
+### Prerequisites
 
 The things that you need to install before running this application
 *   node v10.17.0 or latest
