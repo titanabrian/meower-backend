@@ -164,7 +164,7 @@ module.exports.postDislike=(req,res)=>{
 exports.validate=(method)=>{
     if (method=="post_message"){
         return [
-            check('text').exists().trim().notEmpty().escape().bail().withMessage('Your message is required'),
+            check('text').exists().trim().notEmpty().bail().withMessage('Your message is required'),
             check("parent").trim().escape().bail()
         ]
     }else if(method==="post_like"){
