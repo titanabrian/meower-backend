@@ -20,7 +20,7 @@ The things that you need to install before running this application
 *   npm 6.13.* or latest
 *   mongodb 4.2.3 or latest
 
-Create these following databases. Required at least one Database. You can make 3 Database for each environment which is very recomended. 
+**Run** your Mongo database services and reate these following databases. Required at least one Database. You can make 3 Database for each environment which is very recomended. 
 * Database for **Development** Environment
 * Database for **Testing** Environment
 * Database for **Production** Environment
