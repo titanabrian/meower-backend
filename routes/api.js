@@ -1,18 +1,18 @@
 const router = require("express").Router();
-const {check} = require("express-validator");
+// const {check} = require("express-validator");
 
 // Middleware
 const AuthMiddleware = require("../middleware/AuthMiddleware");
+const AlleyMiddleware = require("../middleware/AlleyMiddleware");
 
 // Controller
 const MessageController=require("../controllers/MessageController");
 
 
 router.use(AuthMiddleware.guard);
+router.use(AlleyMiddleware.guard);
 
-router.get("/ping",[
-    check("username").isIn(["a","b"])
-],(req,res)=>{
+router.get("/ping",(req,res)=>{
     res.json({message:"pong"})
 });
 

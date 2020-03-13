@@ -33,6 +33,11 @@ const MessageSchema= new Schema({
     parent:{
         type:Schema.Types.ObjectId,
         default:null
+    },
+    alley:{
+        type:Schema.Types.ObjectId,
+        ref:"Alley",
+        default:null
     }
 });
 

@@ -8,6 +8,7 @@ const env=require('dotenv').config()
 const cors = require('cors');
 const indexRouter = require('./routes/index');
 const apiRouter = require("./routes/api.js");
+const alleyRouter = require("./routes/alley.js");
 const app = express();
 
 app.use(cors());
@@ -19,21 +20,24 @@ if(process.env.NODE_ENV=="development"){
     console.log("Connected To Database")
     module.exports=runServer(app);
   })
-  .catch(()=>console.log("Failed to Connect to Database"));
+  .catch((err)=>{
+    console.log(err);
+    console.log("Failed to Connect to Database Development")
+  });
 }else if(process.env.NODE_ENV=="testing"){
   mongoose.connect(env.parsed.MONGO_TEST_URI,{useNewUrlParser:true,useUnifiedTopology: true})
   .then(()=>{
     console.log("Connected To Database")
     module.exports=runServer(app);
   })
-  .catch(()=>console.log("Failed to Connect to Database"));
+  .catch(()=>console.log("Failed to Connect to Database Testing"));
 }else if(process.env.NODE_ENV=="production"){
   mongoose.connect(env.parsed.MONGO_PRODURI,{useNewUrlParser:true,useUnifiedTopology: true})
   .then(()=>{
     console.log("Connected To Database")
     module.exports=runServer(app);
   })
-  .catch(()=>console.log("Failed to Connect to Database"));
+  .catch(()=>console.log("Failed to Connect to Database Production"));
 }
 
 
@@ -48,8 +52,8 @@ function runServer(app){
   app.use(express.static(path.join(__dirname, 'public')));
   
   app.use('/', indexRouter);
-  app.use('/api',apiRouter)
-  
+  app.use('/api',apiRouter);
+  app.use('/alley',alleyRouter);
   
   // catch 404 and forward to error handler
   app.use(function(req, res, next) {
